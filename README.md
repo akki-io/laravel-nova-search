@@ -4,7 +4,7 @@
 [![Build Status](https://img.shields.io/travis/akki-io/laravel-nova-search/master.svg?style=flat-square)](https://travis-ci.org/akki-io/laravel-nova-search)
 [![Quality Score](https://img.shields.io/scrutinizer/g/akki-io/laravel-nova-search.svg?style=flat-square)](https://scrutinizer-ci.com/g/akki-io/laravel-nova-search)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![StyleCI](https://styleci.io/repos/291167131/shield?branch=master)](https://styleci.io/repos/291167131)
+[![StyleCI](https://styleci.io/repos/291209513/shield?branch=master)](https://styleci.io/repos/291209513)
 [![Total Downloads](https://img.shields.io/packagist/dt/akki-io/laravel-nova-search.svg?style=flat-square)](https://packagist.org/packages/akki-io/laravel-nova-search)
 
 This package provides a trait that extends the search behaviour of laravel nova resource.
