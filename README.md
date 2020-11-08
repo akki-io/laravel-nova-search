@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/akki-io/laravel-nova-search/master/hero.png" alt="Hero" width="480">
+    <img src="https://raw.githubusercontent.com/akki-io/laravel-nova-search/master/hero.png" alt="Hero" width="600">
 </p>
 
 # Laravel Nova Search
