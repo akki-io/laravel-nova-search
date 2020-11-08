@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://raw.githubusercontent.com/akki-io/laravel-nova-search/master/hero.png" alt="Hero" width="480">
+</p>
+
 # Laravel Nova Search
 
 [![Latest Version](https://img.shields.io/github/release/akki-io/laravel-nova-search.svg?style=flat-square)](https://github.com/akki-io/laravel-nova-search/releases)
