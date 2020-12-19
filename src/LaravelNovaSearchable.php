@@ -82,7 +82,10 @@ trait LaravelNovaSearchable
 
         foreach (static::searchableConcatenationColumns() as $columns) {
             if (is_array($columns)) {
-                $query->orWhereRaw(static::concatCondition($query, $columns).' '.static::likeOperator($query)." '%".$search."%'");
+                $query->orWhereRaw(
+                    static::concatCondition($query, $columns).' '.static::likeOperator($query).' ?',
+                    ['%'.$search.'%']
+                );
             } else {
                 $query->orWhere($model->qualifyColumn($columns), static::likeOperator($query), '%'.$search.'%');
             }
