@@ -19,7 +19,9 @@ trait LaravelNovaSearchable
         return parent::searchable()
             || ! empty(static::$searchConcatenation)
             || ! empty(static::$searchMatchingAny)
-            || ! empty(static::$searchRelations);
+            || ! empty(static::$searchRelations)
+            || ! empty(static::$searchRelationsConcatenation)
+            || ! empty(static::$searchRelationsMatchingAny);
     }
 
     /**
@@ -53,6 +55,26 @@ trait LaravelNovaSearchable
     }
 
     /**
+     * Get the searchable relations concatenation columns for the resource.
+     *
+     * @return array
+     */
+    public static function searchableRelationsConcatenationColumns()
+    {
+        return static::$searchRelationsConcatenation ?? [];
+    }
+
+    /**
+     * Get the searchable relations matching any columns for the resource.
+     *
+     * @return array
+     */
+    public static function searchableRelationsMatchingAnyColumns()
+    {
+        return static::$searchRelationsMatchingAny ?? [];
+    }
+
+    /**
      * Apply the search query to the query.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
@@ -66,6 +88,8 @@ trait LaravelNovaSearchable
             static::applyConcatenationColumnsSearch($query, $search);
             static::applyMatchingAnyColumnsSearch($query, $search);
             static::applyRelationSearch($query, $search);
+            static::applyRelationConcatenationColumnsSearch($query, $search);
+            static::applyRelationMatchingAnyColumnsSearch($query, $search);
         });
     }
 
@@ -149,6 +173,91 @@ trait LaravelNovaSearchable
 
             foreach ($columns as $column) {
                 $query->orWhere($model->qualifyColumn($column), $operator, '%'.$search.'%');
+            }
+        };
+    }
+
+    /**
+     * Apply the relationship column concatenation search query to the given query.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $search
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    protected static function applyRelationConcatenationColumnsSearch($query, $search)
+    {
+        foreach (static::searchableRelationsConcatenationColumns() as $relation => $columns) {
+            $query->orWhereHas($relation, function ($query) use ($columns, $search) {
+                $query->where(static::searchRelationConcatenationQueryApplier($columns, $search));
+            });
+        }
+
+        return $query;
+    }
+
+    /**
+     * Returns a Closure that applies a search query for a given concatenated columns.
+     *
+     * @param array $columns
+     * @param string $search
+     * @return Closure
+     */
+    protected static function searchRelationConcatenationQueryApplier(array $columns, string $search)
+    {
+        return function ($query) use ($columns, $search) {
+            $model = $query->getModel();
+            $operator = static::likeOperator($query);
+
+            foreach ($columns as $items) {
+                if (is_array($items)) {
+                    $query->orWhereRaw(
+                        static::concatCondition($query, $items).' '.$operator.' ?',
+                        ['%'.$search.'%']
+                    );
+                } else {
+                    $query->orWhere($model->qualifyColumn($items), $operator, '%'.$search.'%');
+                }
+            }
+        };
+    }
+
+    /**
+     * Apply the relationship matching any column search query to the given query.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $search
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    protected static function applyRelationMatchingAnyColumnsSearch($query, $search)
+    {
+        foreach (static::searchableRelationsMatchingAnyColumns() as $relation => $columns) {
+            $query->orWhereHas($relation, function ($query) use ($columns, $search) {
+                $query->where(static::searchRelationMatchingAnyQueryApplier($columns, $search));
+            });
+        }
+
+        return $query;
+    }
+
+    /**
+     * Returns a Closure that applies a matching any search query for a given columns.
+     *
+     * @param array $columns
+     * @param string $search
+     * @return Closure
+     */
+    protected static function searchRelationMatchingAnyQueryApplier(array $columns, string $search)
+    {
+        return function ($query) use ($columns, $search) {
+            $model = $query->getModel();
+            $operator = static::likeOperator($query);
+
+            foreach ($columns as $items) {
+                Str::of($search)
+                    ->explode(' ')
+                    ->each(function ($item) use ($query, $model, $items, $operator) {
+                        $query->orWhere($model->qualifyColumn($items), $operator, '%'.$item.'%');
+                    });
             }
         };
     }
