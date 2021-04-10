@@ -20,7 +20,7 @@ class SearchRelationConcatenationTest extends TestCase
     public static $searchRelationsConcatenation = [
         'user' => [
             ['first_name', 'last_name'],
-            ['email']
+            ['email'],
         ],
     ];
 
