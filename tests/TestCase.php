@@ -2,6 +2,7 @@
 
 namespace AkkiIo\LaravelNovaSearch\Tests;
 
+use AkkiIo\LaravelNovaSearch\Tests\Models\Post;
 use AkkiIo\LaravelNovaSearch\Tests\Models\User;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -41,6 +42,19 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function checkResults($search, $count)
     {
         $query = $this->applySearch((new User()), $search);
+
+        $this->assertEquals($count, $query->count());
+    }
+
+    /**
+     * Perform the search and check the result.
+     *
+     * @param $search
+     * @param $count
+     */
+    protected function checkPostResults($search, $count)
+    {
+        $query = $this->applySearch((new Post()), $search);
 
         $this->assertEquals($count, $query->count());
     }
