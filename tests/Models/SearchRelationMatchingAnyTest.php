@@ -13,7 +13,7 @@ class SearchRelationMatchingAnyTest extends TestCase
     use LaravelNovaSearchable;
 
     /**
-     * The columns that should be searched for any matching entry.
+     * The relationship columns that should be searched for any matching entry.
      *
      * @var array
      */

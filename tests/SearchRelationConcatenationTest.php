@@ -13,7 +13,7 @@ class SearchRelationConcatenationTest extends TestCase
     use LaravelNovaSearchable;
 
     /**
-     * The relationship columns that should be searched.
+     * The relationship columns that should to be concatenated and searched.
      *
      * @var array
      */

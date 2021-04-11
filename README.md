@@ -110,6 +110,42 @@ public static $searchRelations = [
 ];
 ```
 
+#### Search multiple columns in relationship using concatenation.
+
+To define which resource fields are searchable, you may assign a two-dimensional array of database columns in the `public static $searchRelationsConcatenation` property of your resource class.
+Each array in the array are names of columns that are concatenated using whitespace.
+
+``` php
+
+/**
+ * The relationship columns that should to be concatenated and searched.
+ *
+ * @var array
+ */
+ public static $searchRelationsConcatenation = [
+    'user' => [
+        ['first_name', 'last_name'],
+        ['email']
+    ],
+ ];
+```
+
+#### Search every word in columns of a relationship.
+
+To define which resource fields are searchable, you may assign an array of database columns in the `public static $searchRelationsMatchingAny` property of your resource class.
+Every word in your input is searched for across all these columns.
+
+```php
+/**
+ * The relationship columns that should be searched for any matching entry.
+ *
+ * @var array
+ */
+ public static $searchRelationsMatchingAny = [
+    'user' => ['first_name', 'last_name'],
+ ];
+```
+
 ### Testing
 
 ``` bash
