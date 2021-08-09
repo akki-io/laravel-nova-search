@@ -3,7 +3,6 @@
 namespace AkkiIo\LaravelNovaSearch;
 
 use Closure;
-use Illuminate\Support\Str;
 use function implode;
 use function is_array;
 
@@ -131,9 +130,9 @@ trait LaravelNovaSearchable
         $tokens = collect(explode(' ', $search));
 
         foreach (static::searchableMatchingAnyColumns() as $columns) {
-           $tokens->each(function ($token) use ($query, $model, $columns) {
-               $query->orWhere($model->qualifyColumn($columns), static::likeOperator($query), '%'.$token.'%');
-           });
+            $tokens->each(function ($token) use ($query, $model, $columns) {
+                $query->orWhere($model->qualifyColumn($columns), static::likeOperator($query), '%'.$token.'%');
+            });
         }
 
         return $query;
