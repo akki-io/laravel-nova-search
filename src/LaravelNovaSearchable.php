@@ -128,13 +128,12 @@ trait LaravelNovaSearchable
     protected static function applyMatchingAnyColumnsSearch($query, $search)
     {
         $model = $query->getModel();
+        $tokens = collect(explode(' ', $search));
 
         foreach (static::searchableMatchingAnyColumns() as $columns) {
-            Str::of($search)
-                ->explode(' ')
-                ->each(function ($item) use ($query, $model, $columns) {
-                    $query->orWhere($model->qualifyColumn($columns), static::likeOperator($query), '%'.$item.'%');
-                });
+           $tokens->each(function ($token) use ($query, $model, $columns) {
+               $query->orWhere($model->qualifyColumn($columns), static::likeOperator($query), '%'.$token.'%');
+           });
         }
 
         return $query;
@@ -251,13 +250,12 @@ trait LaravelNovaSearchable
         return function ($query) use ($columns, $search) {
             $model = $query->getModel();
             $operator = static::likeOperator($query);
+            $tokens = collect(explode(' ', $search));
 
             foreach ($columns as $items) {
-                Str::of($search)
-                    ->explode(' ')
-                    ->each(function ($item) use ($query, $model, $items, $operator) {
-                        $query->orWhere($model->qualifyColumn($items), $operator, '%'.$item.'%');
-                    });
+                $tokens->each(function ($token) use ($query, $model, $items, $operator) {
+                    $query->orWhere($model->qualifyColumn($items), $operator, '%'.$token.'%');
+                });
             }
         };
     }
