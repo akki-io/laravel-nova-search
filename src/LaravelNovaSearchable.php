@@ -289,7 +289,7 @@ trait LaravelNovaSearchable
 
         // Concat with COALESCE to turn possible NULL values into empty strings.
         foreach ($columns as $idx => $column) {
-            $columns[$idx] = sprintf("COALESCE(`%s`, '')", $column);
+            $columns[$idx] = sprintf("COALESCE(%s, '')", $column);
         }
 
         return 'CONCAT('.implode(", ' ', ", $columns).') ';
