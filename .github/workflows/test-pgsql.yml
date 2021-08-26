@@ -1,0 +1,45 @@
+name: "Test MySQL"
+
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+
+jobs:
+    test-php-73:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Start the test docker containers
+              run: docker-compose -f docker-compose-test.yml up -d
+            - name: Delete vendor
+              run: docker-compose -f docker-compose-test.yml exec -T php_73 rm -rf vendor
+            - name: Install composer dependencies
+              run: docker-compose -f docker-compose-test.yml exec -T php_73 composer install
+            - name: Run PHPUnit Tests
+              run: docker-compose -f docker-compose-test.yml exec -T php_73 ./vendor/bin/phpunit --configuration phpunit.pgsql.xml.dist
+    test-php-74:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: Start the test docker containers
+                run: docker-compose -f docker-compose-test.yml up -d
+            -   name: Delete vendor
+                run: docker-compose -f docker-compose-test.yml exec -T php_74 rm -rf vendor
+            -   name: Install composer dependencies
+                run: docker-compose -f docker-compose-test.yml exec -T php_74 composer install
+            -   name: Run PHPUnit Tests
+                run: docker-compose -f docker-compose-test.yml exec -T php_74 ./vendor/bin/phpunit --configuration phpunit.pgsql.xml.dist
+    test-php-80:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: Start the test docker containers
+                run: docker-compose -f docker-compose-test.yml up -d
+            -   name: Delete vendor
+                run: docker-compose -f docker-compose-test.yml exec -T php_80 rm -rf vendor
+            -   name: Install composer dependencies
+                run: docker-compose -f docker-compose-test.yml exec -T php_80 composer install
+            -   name: Run PHPUnit Tests
+                run: docker-compose -f docker-compose-test.yml exec -T php_80 ./vendor/bin/phpunit --configuration phpunit.pgsql.xml.dist
