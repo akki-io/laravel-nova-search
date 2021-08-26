@@ -2,11 +2,10 @@ version: '2.1'
 
 services:
     php_73:
+        image: akkica/laravel-base:7.3
         depends_on:
             db_mysql:
                 condition: service_healthy
-
-        image: akkica/laravel-base:7.3
         volumes:
             - .:/var/www/html
     php_74:
