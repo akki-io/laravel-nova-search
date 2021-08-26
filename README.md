@@ -5,7 +5,6 @@
 # Laravel Nova Search
 
 [![Latest Version](https://img.shields.io/github/release/akki-io/laravel-nova-search.svg?style=flat-square)](https://github.com/akki-io/laravel-nova-search/releases)
-[![Quality Score](https://img.shields.io/scrutinizer/g/akki-io/laravel-nova-search.svg?style=flat-square)](https://scrutinizer-ci.com/g/akki-io/laravel-nova-search)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![StyleCI](https://styleci.io/repos/291209513/shield?branch=master)](https://styleci.io/repos/291209513)
 [![Total Downloads](https://img.shields.io/packagist/dt/akki-io/laravel-nova-search.svg?style=flat-square)](https://packagist.org/packages/akki-io/laravel-nova-search)
