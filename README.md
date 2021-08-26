@@ -12,11 +12,11 @@
 
 ### Testing Statuses
 
-MySQL - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/test-mysql/master?style=flat-square)
+MySQL - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/Test%20MySQL/master?style=flat-square)
 
-SQLite - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/test-sqlite/master?style=flat-square)
+SQLite - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/Test%20SQLite/master?style=flat-square)
 
-pgSQL - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/test-pgsql/master?style=flat-square)
+pgSQL - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/Test%20pgSQL/master?style=flat-square)
 
 This package provides a trait that extends the search behaviour of laravel nova resource.
 
