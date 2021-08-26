@@ -1,4 +1,4 @@
-name: "Test MySQL"
+name: "Test pgSQL"
 
 on:
     push:
