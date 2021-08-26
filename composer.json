@@ -33,7 +33,7 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
+        "test": "vendor/bin/phpunit"
     },
     "config": {
         "sort-packages": true
