@@ -1,4 +1,4 @@
-name: "Test MySQL"
+name: "Test SQLite"
 
 on:
     push:
