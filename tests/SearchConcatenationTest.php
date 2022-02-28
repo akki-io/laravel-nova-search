@@ -31,6 +31,18 @@ class SearchConcatenationTest extends TestCase
     }
 
     /** @test */
+    public function it_returns_results_with_correct_escaping()
+    {
+        $user = factory(User::class)->create();
+        $user->last_name = "D'Antonio";
+        $user->save();
+
+        $this->checkResults($user->first_name.' '.$user->last_name, 1);
+
+        $this->checkResults($user->first_name, 1);
+    }
+
+    /** @test */
     public function it_return_no_result()
     {
         $user = factory(User::class)->create();

@@ -1,0 +1,42 @@
+version: '2.1'
+
+services:
+    php_73:
+        image: akkica/laravel-base:7.3
+        depends_on:
+            db_mysql:
+                condition: service_healthy
+        volumes:
+            - .:/var/www/html
+    php_74:
+        image: akkica/laravel-base:7.4
+        depends_on:
+            db_mysql:
+                condition: service_healthy
+        volumes:
+            - .:/var/www/html
+    php_80:
+        image: akkica/laravel-base:8.0
+        depends_on:
+            db_mysql:
+                condition: service_healthy
+        volumes:
+            - .:/var/www/html
+    db_mysql:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: laravel
+            MYSQL_ROOT_PASSWORD: laravel
+        healthcheck:
+            test: mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD -e 'SHOW DATABASES;'
+            timeout: 5s
+            retries: 5
+    db_pgsql:
+        image: postgres
+        environment:
+            POSTGRES_DB: laravel
+            POSTGRES_USER: laravel
+            POSTGRES_PASSWORD: laravel

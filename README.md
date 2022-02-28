@@ -5,11 +5,17 @@
 # Laravel Nova Search
 
 [![Latest Version](https://img.shields.io/github/release/akki-io/laravel-nova-search.svg?style=flat-square)](https://github.com/akki-io/laravel-nova-search/releases)
-[![Build Status](https://img.shields.io/travis/akki-io/laravel-nova-search/master.svg?style=flat-square)](https://travis-ci.org/akki-io/laravel-nova-search)
-[![Quality Score](https://img.shields.io/scrutinizer/g/akki-io/laravel-nova-search.svg?style=flat-square)](https://scrutinizer-ci.com/g/akki-io/laravel-nova-search)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![StyleCI](https://styleci.io/repos/291209513/shield?branch=master)](https://styleci.io/repos/291209513)
 [![Total Downloads](https://img.shields.io/packagist/dt/akki-io/laravel-nova-search.svg?style=flat-square)](https://packagist.org/packages/akki-io/laravel-nova-search)
+
+### Testing Statuses
+
+MySQL - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/Test%20MySQL/master?style=flat-square)
+
+SQLite - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/Test%20SQLite/master?style=flat-square)
+
+pgSQL - ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/akki-io/laravel-nova-search/Test%20pgSQL/master?style=flat-square)
 
 This package provides a trait that extends the search behaviour of laravel nova resource.
 
@@ -108,6 +114,42 @@ You may search nested relationships using dot notation.
 public static $searchRelations = [
     'user.location' => ['state_abbr', 'country_abbr],
 ];
+```
+
+#### Search multiple columns in relationship using concatenation.
+
+To define which resource fields are searchable, you may assign a two-dimensional array of database columns in the `public static $searchRelationsConcatenation` property of your resource class.
+Each array in the array are names of columns that are concatenated using whitespace.
+
+``` php
+
+/**
+ * The relationship columns that should to be concatenated and searched.
+ *
+ * @var array
+ */
+ public static $searchRelationsConcatenation = [
+    'user' => [
+        ['first_name', 'last_name'],
+        ['email']
+    ],
+ ];
+```
+
+#### Search every word in columns of a relationship.
+
+To define which resource fields are searchable, you may assign an array of database columns in the `public static $searchRelationsMatchingAny` property of your resource class.
+Every word in your input is searched for across all these columns.
+
+```php
+/**
+ * The relationship columns that should be searched for any matching entry.
+ *
+ * @var array
+ */
+ public static $searchRelationsMatchingAny = [
+    'user' => ['first_name', 'last_name'],
+ ];
 ```
 
 ### Testing
