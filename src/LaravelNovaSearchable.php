@@ -292,6 +292,7 @@ trait LaravelNovaSearchable
             $columns[$idx] = sprintf("COALESCE(%s, '')", $column);
         }
 
-        return 'CONCAT('.implode(", ' ', ", $columns).') ';
+        // Replace double empty spaces created by an empty COALESCE concat.
+        return "REPLACE(CONCAT(".implode(", ' ', ", $columns)."), '  ', ' ') ";
     }
 }
