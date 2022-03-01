@@ -159,8 +159,8 @@ trait LaravelNovaSearchable
     /**
      * Returns a Closure that applies a search query for a given columns.
      *
-     * @param  array $columns
-     * @param  string $search
+     * @param  array  $columns
+     * @param  string  $search
      * @return Closure
      */
     protected static function searchRelationQueryApplier(array $columns, string $search)
@@ -196,8 +196,8 @@ trait LaravelNovaSearchable
     /**
      * Returns a Closure that applies a search query for a given concatenated columns.
      *
-     * @param array $columns
-     * @param string $search
+     * @param  array  $columns
+     * @param  string  $search
      * @return Closure
      */
     protected static function searchRelationConcatenationQueryApplier(array $columns, string $search)
@@ -240,8 +240,8 @@ trait LaravelNovaSearchable
     /**
      * Returns a Closure that applies a matching any search query for a given columns.
      *
-     * @param array $columns
-     * @param string $search
+     * @param  array  $columns
+     * @param  string  $search
      * @return Closure
      */
     protected static function searchRelationMatchingAnyQueryApplier(array $columns, string $search)
@@ -262,7 +262,7 @@ trait LaravelNovaSearchable
     /**
      * Resolve the query operator.
      *
-     * @param \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return string
      */
     protected static function likeOperator($query)
@@ -293,6 +293,6 @@ trait LaravelNovaSearchable
         }
 
         // Replace double empty spaces created by an empty COALESCE concat.
-        return "REPLACE(CONCAT(".implode(", ' ', ", $columns)."), '  ', ' ') ";
+        return 'REPLACE(CONCAT('.implode(", ' ', ", $columns)."), '  ', ' ') ";
     }
 }
