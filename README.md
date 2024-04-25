@@ -112,7 +112,7 @@ You may search nested relationships using dot notation.
  * @var array
  */
 public static $searchRelations = [
-    'user.location' => ['state_abbr', 'country_abbr],
+    'user.location' => ['state_abbr', 'country_abbr'],
 ];
 ```
 
