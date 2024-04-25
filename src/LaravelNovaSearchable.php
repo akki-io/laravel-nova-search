@@ -3,6 +3,7 @@
 namespace AkkiIo\LaravelNovaSearch;
 
 use Closure;
+
 use function implode;
 use function is_array;
 
@@ -277,8 +278,8 @@ trait LaravelNovaSearchable
     /**
      * Resolve the concat condition.
      *
-     * @param $query
-     * @param $columns
+     * @param  $query
+     * @param  $columns
      * @return string
      */
     protected static function concatCondition($query, $columns)

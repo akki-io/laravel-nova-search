@@ -36,12 +36,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Perform the search and check the result.
      *
-     * @param $search
-     * @param $count
+     * @param  $search
+     * @param  $count
      */
     protected function checkResults($search, $count)
     {
-        $query = $this->applySearch((new User()), $search);
+        $query = $this->applySearch(new User(), $search);
 
         $this->assertEquals($count, $query->count());
     }
@@ -49,12 +49,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Perform the search and check the result.
      *
-     * @param $search
-     * @param $count
+     * @param  $search
+     * @param  $count
      */
     protected function checkPostResults($search, $count)
     {
-        $query = $this->applySearch((new Post()), $search);
+        $query = $this->applySearch(new Post(), $search);
 
         $this->assertEquals($count, $query->count());
     }
