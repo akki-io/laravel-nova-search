@@ -5,8 +5,9 @@ namespace AkkiIo\LaravelNovaSearch\Tests;
 use AkkiIo\LaravelNovaSearch\LaravelNovaSearchable;
 use AkkiIo\LaravelNovaSearch\Tests\Models\Post;
 use AkkiIo\LaravelNovaSearch\Tests\Models\User;
-use function factory;
 use Illuminate\Support\Str;
+
+use function factory;
 
 class SearchRelationMatchingAnyTest extends TestCase
 {
