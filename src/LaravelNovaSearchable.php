@@ -3,6 +3,8 @@
 namespace AkkiIo\LaravelNovaSearch;
 
 use Closure;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+
 use function implode;
 use function is_array;
 
@@ -80,7 +82,7 @@ trait LaravelNovaSearchable
      * @param  string  $search
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function applySearch($query, $search)
+    protected static function applySearch(Builder $query, string $search): Builder
     {
         return $query->where(function ($query) use ($search) {
             parent::applySearch($query, $search);
